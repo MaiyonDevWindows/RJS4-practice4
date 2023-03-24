@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-
+import React from 'react';
 const MAX_TEXT_LENGTH = 15;
-
 class CheckInput extends React.Component {
     constructor(props) {
         super(props);
@@ -10,21 +8,25 @@ class CheckInput extends React.Component {
             message: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleOnKeyDown = this.handleOnKeyDown.bind(this);
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
     }
     handleInputChange(e) {
-        this.setState({ content: e.target.value })
+        this.setState({
+            content: e.target.value
+        })
     }
-    handleOnKeyDown(e) {
+    handleOnKeyPress(e) {
         if (e.charCode === 13) {
             let message = '';
             const { content } = this.state;
             if (content.length > 0 && content.length <= MAX_TEXT_LENGTH) {
-                message = 'Nội dung hợp lệ';
+                message = 'Nội dung hợp lệ.'
             } else if (content.length > MAX_TEXT_LENGTH) {
-                message = 'Nội dung quá dài, vui lòng đảm bảo nội dung nhỏ hơn hoặc bằng 15 ký tự';
+                message = 'Nội dung quá dài, vui lòng đảm bảo nội dung nhỏ hơn hoặc bằng 15 ký tự'
             }
-            this.setState({ message, })
+            this.setState({
+                message,
+            })
         }
     }
     render() {
@@ -35,9 +37,10 @@ class CheckInput extends React.Component {
                 <input
                     value={content}
                     onChange={this.handleInputChange}
-                    onKeyDown={this.handleOnKeyDown}
+                    onKeyPress={this.handleOnKeyPress}
                     name="name"
-                    placeholder='Nhập nội dung' />
+                    placeholder="Nhập nội dung"
+                />
                 {this.state.message && (<div>
                     <h3>{this.state.message}</h3>
                 </div>)}
@@ -45,5 +48,4 @@ class CheckInput extends React.Component {
         )
     }
 }
-
 export default CheckInput;
